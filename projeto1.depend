@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1684009510 source:c:\users\pc\documents\projeto1\projeto1\functions.c
+	"trabalho1.h"
+
+1681914326 c:\users\pc\documents\projeto1\projeto1\trabalho1.h
+
+1668693234 source:c:\users\pc\documents\projeto1\projeto1\imagem.c
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	"imagem.h"
+
+1668693044 c:\users\pc\documents\projeto1\projeto1\imagem.h
+
+1684098925 source:c:\users\pc\documents\projeto1\projeto1\main_codifica.c
+	"trabalho1.h"
+
+1684032845 source:c:\users\pc\documents\projeto1\projeto1\main_decodifica.c
+	"trabalho1.h"
+
+1681927628 source:c:\users\pc\documents\projeto1\projeto1\trabalho1.c
+	<stdio.h>
+	<stdlib.h>
+	"trabalho1.h"
+	"imagem.h"
+
+1684099934 source:c:\users\pc\documents\projeto1\projeto1\decodifica.c
+	"trabalho1.h"
+
+1683810519 source:c:\users\pc\documents\projeto1\projeto1\teste.c
+	"trabalho1.h"
+
+1684276940 source:c:\users\pc\documents\projeto1\projeto1\codifica.c
+	"trabalho1.h"
+
+1684099428 source:c:\users\pc\documents\projeto1\projeto1\marcelacodifica.c
+
