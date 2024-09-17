@@ -4,9 +4,9 @@
 /* Bogdan T. Nassu - btnassu@utfpr.edu.br                                     */
 /* Leyza E. B. Dorini - leyza@utfpr.edu.br                                    */
 /*============================================================================*/
-/* Funções auxiliares para o 1o trabalho da disciplina CSF13 (Fundamentos de
- * Programação 1), 2023-1, prof. Bogdan T. Nassu, Universidade Tecnológica
- * Federal do Paraná. */
+/* Funï¿½ï¿½es auxiliares para o 1o trabalho da disciplina CSF13 (Fundamentos de
+ * Programaï¿½ï¿½o 1), 2023-1, prof. Bogdan T. Nassu, Universidade Tecnolï¿½gica
+ * Federal do Paranï¿½. */
 /*============================================================================*/
 
 #include <stdio.h>
@@ -16,16 +16,16 @@
 #include "imagem.h"
 
 /*============================================================================*/
-/* Estas variáveis são globais somente para isolar parte do trabalho dos alunos (evita o uso de ponteiros para structs por eles). */
+/* Estas variï¿½veis sï¿½o globais somente para isolar parte do trabalho dos alunos (evita o uso de ponteiros para structs por eles). */
 
-Imagem1C* img = NULL; // Imagem de entrada (codificação) ou saída (decodificação).
+Imagem1C* img = NULL; // Imagem de entrada (codificaï¿½ï¿½o) ou saï¿½da (decodificaï¿½ï¿½o).
 int linha_atual; // Linha atual na imagem.
 int coluna_atual; // Coluna atual na imagem.
-FILE* stream_rbd = NULL; // Stream de entrada (decodificação) ou saída (codificação).
+FILE* stream_rbd = NULL; // Stream de entrada (decodificaï¿½ï¿½o) ou saï¿½da (codificaï¿½ï¿½o).
 
 /*============================================================================*/
-/* Cria "streams simulados" para codificar - a entrada é simplesmente uma
- * imagem com uma posição associada, a saída é simplesmente um arquivo. */
+/* Cria "streams simulados" para codificar - a entrada ï¿½ simplesmente uma
+ * imagem com uma posiï¿½ï¿½o associada, a saï¿½da ï¿½ simplesmente um arquivo. */
 
 void criaStreamsCod (char* arquivo_img, char* arquivo_rbd)
 {
@@ -39,7 +39,7 @@ void criaStreamsCod (char* arquivo_img, char* arquivo_rbd)
         exit (1);
     }
 
-    /* Aponta para o início. */
+    /* Aponta para o inï¿½cio. */
     linha_atual = 0;
     coluna_atual = 0;
 
@@ -51,11 +51,11 @@ void criaStreamsCod (char* arquivo_img, char* arquivo_rbd)
         exit (1);
     }
 
-    /* Já coloca nas 2 primeiras posições do arquivo o tamanho da imagem. */
+    /* Jï¿½ coloca nas 2 primeiras posiï¿½ï¿½es do arquivo o tamanho da imagem. */
     /* Usamos 2 bytes para a altura e 2 bytes para a largura. */
     if (img->altura > 0xFFFF || img->largura > 0xFFFF)
     {
-        printf ("A imagem não deve ter mais do que %d linhas/colunas (tem %lu linhas e %lu colunas).\n", 0xFFFF, img->altura, img->largura);
+        printf ("A imagem nï¿½o deve ter mais do que %d linhas/colunas (tem %lu linhas e %lu colunas).\n", 0xFFFF, img->altura, img->largura);
         exit (1);
     }
 
@@ -64,8 +64,8 @@ void criaStreamsCod (char* arquivo_img, char* arquivo_rbd)
 }
 
 /*----------------------------------------------------------------------------*/
-/* Cria "streams simulados" para decodificar - a entrada é simplesmente um
- * arquivo, a saída é uma imagem com uma posição associada. */
+/* Cria "streams simulados" para decodificar - a entrada ï¿½ simplesmente um
+ * arquivo, a saï¿½da ï¿½ uma imagem com uma posiï¿½ï¿½o associada. */
 
 void criaStreamsDecod (char* arquivo_rbd)
 {
@@ -79,7 +79,7 @@ void criaStreamsDecod (char* arquivo_rbd)
         exit (1);
     }
 
-    /* Obtém o tamanho da imagem. São 2 bytes para a altura e 2 bytes para a largura. Lemos os 4 bytes de uma só vez. */
+    /* Obtï¿½m o tamanho da imagem. Sï¿½o 2 bytes para a altura e 2 bytes para a largura. Lemos os 4 bytes de uma sï¿½ vez. */
     fread (&tam_imagem, 1, 4, stream_rbd);
     altura = tam_imagem >> 16;
     largura = tam_imagem & 0xFFFF;
@@ -87,7 +87,7 @@ void criaStreamsDecod (char* arquivo_rbd)
     /* Cria a imagem. */
     img = criaImagem1C (largura, altura);
 
-    /* Aponta para o início. */
+    /* Aponta para o inï¿½cio. */
     linha_atual = 0;
     coluna_atual = 0;
 }
@@ -123,11 +123,11 @@ void destroiStreams ()
 }
 
 /*============================================================================*/
-/* As funções abaixo são aquelas usadas pelos alunos. Vou supor que todos os
- * streams estão abertos e funcionando. */
+/* As funï¿½ï¿½es abaixo sï¿½o aquelas usadas pelos alunos. Vou supor que todos os
+ * streams estï¿½o abertos e funcionando. */
 
-/* Retorna o valor do pixel atual, e aponta para o próximo. Retorna
- * 0xFFFFFFFF se não tiver mais pixels para retornar. */
+/* Retorna o valor do pixel atual, e aponta para o prï¿½ximo. Retorna
+ * 0xFFFFFFFF se nï¿½o tiver mais pixels para retornar. */
 
 unsigned int pegaProximoPixel ()
 {
@@ -139,7 +139,7 @@ unsigned int pegaProximoPixel ()
 
     pixel = img->dados [linha_atual][coluna_atual];
 
-    /* Vai para a próxima posição antes de retornar. */
+    /* Vai para a prï¿½xima posiï¿½ï¿½o antes de retornar. */
     coluna_atual++;
     if (coluna_atual == img->largura)
     {
@@ -151,11 +151,11 @@ unsigned int pegaProximoPixel ()
 }
 
 /*----------------------------------------------------------------------------*/
-/* Adiciona um pixel à imagem. Passamos a apontar para o próximo pixel. */
+/* Adiciona um pixel ï¿½ imagem. Passamos a apontar para o prï¿½ximo pixel. */
 
 void enviaPixel (unsigned char pixel)
 {
-    // Ignora pixels recebidos após completar a imagem.
+    // Ignora pixels recebidos apï¿½s completar a imagem.
     if (linha_atual >= img->altura)
         return;
 
@@ -170,14 +170,14 @@ void enviaPixel (unsigned char pixel)
 }
 
 /*----------------------------------------------------------------------------*/
-/* Pega o próximo byte do arquivo que simula o stream com bit depth reduzido.
- * Retorna 0xFFFFFFFF se não tiver mais nada para retornar. */
+/* Pega o prï¿½ximo byte do arquivo que simula o stream com bit depth reduzido.
+ * Retorna 0xFFFFFFFF se nï¿½o tiver mais nada para retornar. */
 
  unsigned int pegaProximoByteRBD ()
  {
     unsigned char byte;
 
-    /* Lê 1 byte do stream. */
+    /* Lï¿½ 1 byte do stream. */
     if (!fread (&byte, 1, 1, stream_rbd))
         return (0xFFFFFFFF);
 

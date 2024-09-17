@@ -3,22 +3,22 @@
 /*----------------------------------------------------------------------------*/
 /* Joao Guilherme Menegassi Silva - joaosilva.2005@alunos.utfpr.edu.br        */
 /*============================================================================*/
-/* Implementação das funções do projeto. */
+/* ImplementaÃ§Ã£o das funÃ§Ãµes do projeto. */
 /*============================================================================*/
 
 #include"trabalho1.h"
 
-//Declaração da função codifica.
+//DeclaraÃ§Ã£o da funÃ§Ã£o codifica.
 void codificaStreamImagem (int n_bits);
 
-//Funções Auxiliares.
+//FunÃ§Ãµes Auxiliares.
 unsigned int pegaProximoPixel ();
 void enviaByteRBD (unsigned char byte);
 
 void codificaStreamImagem (int n_bits)
 {
 
-    // Declaração das variaveis
+    // DeclaraÃ§Ã£o das variaveis
     int i;
     int contador = 8 - n_bits;
     unsigned int byte;
@@ -27,7 +27,7 @@ void codificaStreamImagem (int n_bits)
     // Armazena o primeiro byte;
     byte = pegaProximoPixel();
 
-    // Loop até o ultimo pixel.
+    // Loop atÃ© o ultimo pixel.
     while(byte != 0xFFFFFFFF)
     {
 
@@ -40,7 +40,7 @@ void codificaStreamImagem (int n_bits)
             //soma os n_bits significativos.
             aux = byte | aux;
 
-            //Diminui a variável "contador" em n_bits para que a proxima soma seja correta.
+            //Diminui a variÃ¡vel "contador" em n_bits para que a proxima soma seja correta.
             contador -= n_bits;
 
             byte = pegaProximoPixel();
@@ -49,10 +49,40 @@ void codificaStreamImagem (int n_bits)
         // Envia a soma dos bits mais significativos de cada byte.
         enviaByteRBD(aux);
 
-        //Reseta o contador e o aux para que não ocorra problemas na próxima soma.
+        //Reseta o contador e o aux para que nÃ£o ocorra problemas na prÃ³xima soma.
         aux = 0;
         contador = 8 - n_bits;
 
     }
 }
 
+//DeclaraÃ§Ã£o da funÃ§Ã£o decodifica.
+void decodificaStreamRBD (int n_bits, int preenche);
+
+//FunÃ§Ãµes Auxiliares.
+unsigned int pegaProximoByteRBD ();
+void enviaPixel (unsigned char pixel);
+
+void decodificaStreamRBD (int n_bits, int preenche)
+{
+    // DeclaraÃ§Ã£o das variaveis.
+    int byte, aux;
+    int i, moveBits = 8 - n_bits;
+
+    // Armazena o primeiro byte.
+    byte = pegaProximoByteRBD();
+
+    while (byte != 0xFFFFFFFF)
+    {
+        /* O loop irÃ¡ rodar atÃ© o 0, pois iremos usar o 0 na conta, vendo que no ultimo conjunto de n_bits
+        o byte nÃ£o deveria mover nenhuma casa para a direita, usei a variÃ¡vel i para essa funÃ§Ã£o.*/
+        for (i = 8 / n_bits - 1; i >= 0 ; i--)
+        {
+            // Move para a direita atÃ© i = 0;
+            aux = byte >> n_bits * i;
+            aux = aux << moveBits;
+            enviaPixel(aux);
+        }
+        byte = pegaProximoByteRBD();
+    }
+}
